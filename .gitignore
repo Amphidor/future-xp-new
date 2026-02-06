@@ -1,0 +1,43 @@
+# Next.js
+.next/
+out/
+build/
+
+# Dependencies
+node_modules/
+
+# Env
+.env*.local
+
+# System & Logs
+.DS_Store
+npm-debug.log*
+yarn-error.log*
+
+# Amplify (if not using main branch for deployment)
+amplify/
+
+# Next.js
+.next/
+out/
+build/
+ 
+# Dependencies
+node_modules/
+ 
+# Env
+.env*.local
+.env.development
+ 
+# System & Logs
+.DS_Store
+npm-debug.log*
+yarn-error.log*
+ 
+# Amplify (if not using main branch for deployment)
+amplify/
+/.next
+.env.development
+.env.development
+.env.development
+*.json
