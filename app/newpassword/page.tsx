@@ -1,5 +1,5 @@
-import newpassword from '@/components/NewPassword';
+import NewPassword from '@/components/NewPassword';
 
-export default function NewPassword() {
+export default function newpassword() {
   return <NewPassword />;
 }

@@ -50,84 +50,68 @@ export default function NewPassword() {
           </div> */}
 
           <h2 className="text-2xl font-bold text-gray-800 mb-2 text-left">
-            Welcome Back 👋
+            New Password
           </h2>
 
-          <p className="text-[#7f7f7f] mb-8 text-[14px]">Welcome back to Future XP. We’re glad to have you again. Jump right back
-            into your personalized dashboard, explore the latest updates, and continue building smarter, faster experiences.</p>
-          <form className="space-y-8" onSubmit={handleSubmit}>
+          <p className="text-[#7f7f7f] mb-8 text-[14px]">Create a new password for your Future XP account. Choose a strong password to keep your account secure and get back to what matters.</p>
+          <form className="" onSubmit={handleSubmit}>
             {/* Email */}
-            <div>
+            <div className="mb-6">
               <label
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Email Address
+                Old Password
               </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                className="mt-1 block w-full px-4 py-3 mt-2 border border-[#D4D7E3] rounded-lg shadow-sm placeholder-gray-400 focus:ring-primary-400 focus:border-primary-400 sm:text-sm"
-                placeholder="Enter Your Email Address"
+              <input className="mt-1 block w-full px-4 py-3 mt-2 border border-[#D4D7E3] rounded-lg shadow-sm placeholder-gray-400 focus:ring-primary-400 focus:border-primary-400 sm:text-sm"
+                placeholder="Old Password"
               />
             </div>
 
             {/* Password */}
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Password
-              </label>
-              <div className="mt-1 relative">
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  autoComplete="current-password"
-                  required
-                  value={formData.password}
-                  onChange={(e) =>
-                    setFormData({ ...formData, password: e.target.value })
-                  }
-                  className="block w-full px-4 py-3 mt-2 pr-10 border-[1px] border-[#D4D7E3] rounded-lg shadow-sm placeholder-gray-400 focus:ring-primary-400 focus:border-primary-400 sm:text-sm"
-                  placeholder="Enter Your password"
-                />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400" />
-                  ) : (
-                    <Eye className="h-5 w-5 text-gray-400" />
-                  )}
-                </button>
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700">
+                  New Password
+                </label>
+                <div className="mt-1 relative">
+                  <input className="block w-full px-4 py-3 mt-2 pr-10 border-[1px] border-[#D4D7E3] rounded-lg shadow-sm placeholder-gray-400 focus:ring-primary-400 focus:border-primary-400 sm:text-sm"
+                    placeholder="Enter Your New Password"
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-5 w-5 text-gray-400" />
+                    ) : (
+                      <Eye className="h-5 w-5 text-gray-400" />
+                    )}
+                  </button>
+                </div>
               </div>
-              <div className="mt-2 flex items-center justify-between mb-24">
+              <div className="mt-2 flex items-center justify-between">
                 <div>
                   {error && (
                     <p className="text-red-600 text-sm mt-2">{error}</p>
                   )}
                 </div>
-                {<div>
-                  <a
-                    href="/forgot-password"
-                    className="text-[16px] text-[#084A85] font-semibold"
-                  >
-                    Forgot password?
-                  </a>
-                </div>}
+
               </div>
+
+              <div  className="mb-2">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Confirm New Password
+                </label>
+                <input className="mt-1 block w-full px-4 py-3 mt-2 border border-[#D4D7E3] rounded-lg shadow-sm placeholder-gray-400 focus:ring-primary-400 focus:border-primary-400 sm:text-sm"
+                  placeholder="Enter Your Confirm New Password"
+                />
+              </div>
+              <p className="text-[#7f7f7f] text-[12px] mb-14">Use 8 or more characters with a mix of letters, numbers and symbols</p>
             </div>
 
             {/* Submit */}
@@ -139,14 +123,12 @@ export default function NewPassword() {
               {loading ? (
                 <div className="flex items-center">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                  Signing in...
+
                 </div>
               ) : (
-                "Sign in"
+                "Update"
               )}
             </button>
-
-            <h6 className="text-[#828282] text-center font-medium">Don't you have an account? <a href="" className="text-[#084A85] font-semibold">Sign Up</a></h6>
           </form>
         </div>
       </div>

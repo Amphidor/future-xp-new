@@ -10,9 +10,9 @@ export default function WebLayout({
 }) {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
