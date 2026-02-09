@@ -32,53 +32,67 @@ export default function WebviewTermsPage() {
           </h1>
 
           <p className="text-[14px] font-medium !leading-[1.8] text-[#7f7f7f] text-left mb-8">
-            Future XP may collect personal and non-personal information when users visit or interact with our website.
-            This may include names, email addresses, contact details, device information, IP addresses, browser types,
-            and usage data. Information is collected to improve platform functionality, enhance user experience, and
-            deliver relevant services.
+            By accessing or using the Future XP website, you agree to comply with and be bound by
+            these Terms and Conditions. Future XP provides information, services, and digital
+            experiences for general informational and professional use only. All content available
+            on this website, including text, graphics, logos, features, and software, is the property
+            of Future XP and is protected by applicable intellectual property laws. Users agree not
+            to misuse the platform, attempt unauthorized access, disrupt services, or use the website
+            for any unlawful activities. Future XP reserves the right to modify, suspend, or discontinue
+            any part of the website or services at any time without prior notice. We are not responsible
+            for any direct or indirect damages arising from the use or inability to use the website.
+            Continued use of the website after updates to these terms constitutes acceptance of the
+            revised Terms and Conditions.
           </p>
 
           <p className="text-[14px] font-medium !leading-[1.8] text-[#7f7f7f] text-left mb-8">
-            The information collected by Future XP is used to operate, maintain, and improve our website and services.
-            We may use data to communicate with users, provide support, personalize content, analyze usage trends, and
-            ensure platform security. Data is never used for unlawful or unauthorized purposes.
+            By using the Future XP website, you acknowledge that you have read, understood, and
+            agreed to these Terms and Conditions. The website is intended for lawful use only,
+            and users must ensure that their activities do not violate any applicable laws or
+            regulations. Unauthorized use of the platform, including data scraping, system interference,
+            or misuse of content, is strictly prohibited and may result in restricted access or legal action.
           </p>
 
           <p className="text-[14px] font-medium !leading-[1.8] text-[#7f7f7f] text-left mb-8">
-            Future XP uses cookies and similar tracking technologies to enhance website performance and user experience.
-            Cookies help us understand user preferences, monitor traffic patterns, and optimize content delivery. Users
-            can control or disable cookies through their browser settings, though some features may be affected.
+            All content published on the Future XP website, including but not limited to designs,
+            text, images, videos, features, and interactive experiences, is owned by or licensed
+            to Future XP. Users may view or use the content for personal or internal business
+            purposes only. Reproduction, redistribution, modification, or commercial use of any
+            content without prior written consent from Future XP is not permitted.
           </p>
 
           <p className="text-[14px] font-medium !leading-[1.8] text-[#7f7f7f] text-left mb-8">
-            Future XP does not sell, rent, or trade personal information to third parties. We may share data with trusted
-            service providers who assist in website operations, analytics, or communication, subject to strict confidentiality
-            obligations. Information may also be disclosed if required by law or legal process.
+            Future XP strives to ensure uninterrupted access to its services; however, we do not
+            guarantee that the website will always be available, secure, or error-free. We reserve
+            the right to update, enhance, modify, or discontinue any feature or service at our sole
+            discretion, with or without notice. Future XP shall not be held liable for any loss or
+            inconvenience caused by service interruptions or changes.  
           </p>
 
           <p className="text-[14px] font-medium !leading-[1.8] text-[#7f7f7f] text-left mb-8">
-            Users have the right to access, update, correct, or request deletion of their personal information, subject to
-            applicable laws. You may also choose to opt out of certain communications or data processing activities. Requests
-            can be made through the contact details provided on the website.
+            Future XP provides its website and services on an “as-is” and “as-available” basis.
+            We make no warranties regarding accuracy, reliability, or suitability of the content
+            or services. To the fullest extent permitted by law, Future XP shall not be liable
+            for any direct, indirect, incidental, or consequential damages arising from the use
+            of or reliance on the website, even if advised of the possibility of such damages.
           </p>
 
           <p className="text-[14px] font-medium !leading-[1.8] text-[#7f7f7f] text-left mb-8">
-            The Future XP website may integrate third-party tools, plugins, or services to enhance functionality.
-            These third parties operate under their own privacy policies, and Future XP is not responsible for their
-            data handling practices. Users are encouraged to review third-party privacy terms independently.
+            Users are responsible for maintaining the confidentiality of their account information,
+            if applicable, and for all activities conducted through their access to the Future XP
+            website. You agree to provide accurate and up-to-date information and not to impersonate
+            any individual or entity. Any misuse of the platform that compromises security, performance,
+            or user trust may result in immediate suspension or termination of access.
           </p>
 
           <p className="text-[14px] font-medium !leading-[1.8] text-[#7f7f7f] text-left mb-8">
-            Future XP retains user information only for as long as necessary to fulfill the purposes outlined in this
-            Privacy Policy, comply with legal obligations, or resolve disputes. When data is no longer required, it
-            is securely deleted or anonymized in accordance with industry standards.
+           The Future XP website may contain links to third-party websites or services for user
+           convenience. Future XP does not control, endorse, or assume responsibility for the
+           content, policies, or practices of any third-party platforms. Accessing third-party
+           services is at your own risk, and users are encouraged to review the terms and
+           privacy policies of those external websites.
           </p>
 
-          <p className="text-[14px] font-medium !leading-[1.8] text-[#7f7f7f] text-left">
-            Future XP does not knowingly collect personal information from children under the age required by applicable
-            law. If such information is discovered, we will take appropriate steps to delete it promptly. Parents
-            or guardians may contact us if they believe a child has shared personal data.
-          </p>
 
         </div>
       </section>
