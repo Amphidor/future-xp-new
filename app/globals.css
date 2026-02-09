@@ -155,3 +155,61 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+h1 > span span {
+  display: block;
+  animation: animateWords 10s infinite ease;
+}
+
+/* divided into as many parts as there are spans, each part decreasing the translateY by -100% */
+@keyframes animateWords {
+  0% {
+    transform: translateY(0%);
+  }
+  25% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(-200%);
+  }
+  75% {
+    transform: translateY(-300%);
+  }
+  100% {
+    transform: translateY(-400%);
+  }
+}
+
+.span {
+  position: relative;
+  display: inline-block;
+  color: #000000;
+  height: 1.45em;
+  vertical-align: bottom;
+  overflow: hidden;
+  font-size: 20px;
+}
+.span .span-1 {
+  display: block;
+  animation: animateWords 5s infinite ease;
+}
+
+/* divided into as many parts as there are spans, each part decreasing the translateY by -100% */
+@keyframes animateWords {
+  0% {
+    transform: translateY(0%);
+  }
+  25% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(-200%);
+  }
+  75% {
+    transform: translateY(-300%);
+  }
+  100% {
+    transform: translateY(-400%);
+  }
+}

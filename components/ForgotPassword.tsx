@@ -50,12 +50,12 @@ export default function ForgotPassword() {
 
 
                         {/* Submit */}
-                        <button
+                        <a href="/otpverify"
                             type="submit"
                             className="w-full flex justify-center py-4 px-4 text-[15px] font-semibold rounded-lg text-white bg-[#084A85] focus:outline-none focus:ring-2 focus:ring-primary-400 disabled:opacity-50"
                         >
                             Continue
-                        </button>
+                        </a>
 
                     </form>
                 </div>

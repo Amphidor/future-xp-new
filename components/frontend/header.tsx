@@ -16,13 +16,13 @@ export default function Header() {
           <div className="flex h-full items-center justify-between">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Image
+              <a href=""><Image
                 src="/frontend/logo-future.png"
                 alt="Logo"
                 width={80}
                 height={50}
                 className="h-auto w-[80px] sm:w-[80px]"
-              />
+              /></a>
             </div>
 
             {/* Desktop Navigation */}
@@ -46,7 +46,7 @@ export default function Header() {
 
             <div className="flex items-center gap-[20px]">
 
-              <a href="" className="bg-[#ffffff] border-[#7f7f7f] border-[1.5px] px-6 py-3 text-[#7f7f7f] font-medium rounded-[10px] flex items-center gap-[10px]">Login <img src="/frontend/log-ico.png" className="w-[20px]" /></a>
+              <a href="/login" className="bg-[#ffffff] border-[#7f7f7f] border-[1.5px] px-6 py-3 text-[#7f7f7f] font-medium rounded-[10px] flex items-center gap-[10px]">Login <img src="/frontend/log-ico.png" className="w-[20px]" /></a>
 
               <a href="" className="bg-[#DC143C] px-6 py-3 text-[#ffffff] font-medium rounded-[10px] flex items-center gap-[10px]">Get Started <img src="/frontend/arrow.png" className="w-[20px]" /></a>
 

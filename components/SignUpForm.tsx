@@ -187,7 +187,7 @@ export default function SignUpForm() {
                             )}
                         </button>
 
-                        <h6 className="text-[#828282] text-center font-medium">Don't you have an account? <a href="" className="text-[#084A85] font-semibold">Sign In</a></h6>
+                        <h6 className="text-[#828282] text-center font-medium">Don't you have an account? <a href="/login" className="text-[#084A85] font-semibold">Sign In</a></h6>
                     </form>
                 </div>
             </div>

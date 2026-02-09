@@ -121,7 +121,7 @@ export default function LoginForm() {
                 </div>
                 {<div>
                   <a
-                    href="/forgot-password"
+                    href="/forgotpassword"
                     className="text-[16px] text-[#084A85] font-semibold"
                   >
                     Forgot password?
@@ -146,7 +146,7 @@ export default function LoginForm() {
               )}
             </button>
 
-            <h6 className="text-[#828282] text-center font-medium">Don't you have an account? <a href="" className="text-[#084A85] font-semibold">Sign Up</a></h6>
+            <h6 className="text-[#828282] text-center font-medium">Don't you have an account? <a href="/signup" className="text-[#084A85] font-semibold">Sign Up</a></h6>
           </form>
         </div>
       </div>
