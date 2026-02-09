@@ -317,3 +317,9 @@ h1>span span {
     font-size: 0.7rem;
   }
 }
+
+.my-main-grid {
+  display: grid;
+  grid-template-columns: 24% 74%;
+  gap:2%;
+}
