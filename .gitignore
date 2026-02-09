@@ -40,4 +40,4 @@ amplify/
 .env.development
 .env.development
 .env.development
-*.json
+
