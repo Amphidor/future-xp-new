@@ -320,6 +320,6 @@ h1>span span {
 
 .my-main-grid {
   display: grid;
-  grid-template-columns: 24% 74%;
+  grid-template-columns: 20% 78%;
   gap:2%;
 }
