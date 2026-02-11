@@ -532,6 +532,7 @@ h1>span span {
     font-weight: 300;
     padding-bottom: 15px;
     padding-top: 10px;
+    text-decoration: underline;
 }
 
 .card
