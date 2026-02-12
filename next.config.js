@@ -1,21 +1,20 @@
-// const nextConfig = {
-//   images: {
-//     domains: ['console.germanfy.com', 'localhost'],
-//   },
-//   async rewrites() {
-//     return [
-//       {
-//         // Forward /api/* requests to backend
-//         source: '/api/:path*',
-//         destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/:path*`
-//       },
-//       {
-//         // Forward /uploads/* to backend for images/files
-//         source: '/uploads/:path*',
-//         destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/uploads/:path*`
-//       }
-//     ];
-//   },
-// };
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Enable React strict mode
+  reactStrictMode: true,
+  // AWS Amplify runs Node on the server; ensure compatibility
+  // Uncomment and adjust if you need image domains or rewrites:
+  // images: {
+  //   domains: ['console.future-xp.com', 'localhost'],
+  // },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: '/api/:path*',
+  //       destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/:path*`,
+  //     },
+  //   ];
+  // },
+};
 
-// module.exports = nextConfig;
+module.exports = nextConfig;
