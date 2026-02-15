@@ -10,6 +10,7 @@ import { loginRequest } from "../store/slices/authSlice";
 import Image from "next/image";
 import { RootState } from "../store";
 import { useDispatch, useSelector } from "react-redux";
+import { getClientAuthBaseUrl } from "../lib/api";
 
 interface LoginFormProps {
   inModal?: boolean;
@@ -108,8 +109,9 @@ export default function LoginForm({ inModal = false, onCloseModal }: LoginFormPr
     setSignUpLoading(true);
     try {
       const name = [signUpData.firstName, signUpData.lastName].filter(Boolean).join(" ").trim() || "User";
-      // Use Next.js API route (same origin) so backend on 3000 doesn't need CORS for 3001
-      const res = await axios.post("/api/auth/student-register", {
+      const base = getClientAuthBaseUrl();
+      const registerUrl = base ? `${base}/auth/student-register` : "/api/auth/student-register";
+      const res = await axios.post(registerUrl, {
         email: signUpData.email,
         password: signUpData.password,
         name,

@@ -17,6 +17,17 @@ const getApiBaseUrl = (): string => {
 
 export const API_BASE_URL = getApiBaseUrl();
 
+/**
+ * For client-side auth calls. In development we use same-origin /api (Next.js proxy).
+ * In production (e.g. Amplify static) we call the backend directly so auth works without API routes.
+ */
+export function getClientAuthBaseUrl(): string {
+  if (typeof window === "undefined") return ""; // SSR: use relative
+  const url =
+    process.env.NEXT_PUBLIC_API_URL ?? "https://console.future-xp.com/api";
+  return process.env.NODE_ENV === "development" ? "" : url.replace(/\/$/, "");
+}
+
 export const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {

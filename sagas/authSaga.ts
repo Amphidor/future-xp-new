@@ -7,10 +7,12 @@ import {
   logout,
 } from "../store/slices/authSlice";
 import Cookies from "js-cookie";
+import { getClientAuthBaseUrl } from "../lib/api";
 
-// Use local API route (proxy) to avoid CORS - proxies to console.future-xp.com
 function loginApi(payload: { email: string; password: string }) {
-  return axios.post("/api/auth/student-login", payload, {
+  const base = getClientAuthBaseUrl();
+  const url = base ? `${base}/auth/student-login` : "/api/auth/student-login";
+  return axios.post(url, payload, {
     headers: { "Content-Type": "application/json" },
     maxBodyLength: Infinity,
   });
