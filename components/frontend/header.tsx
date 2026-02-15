@@ -37,17 +37,17 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-200 h-[80px] shadow-[0px_3px_15px_#084a857d]">
-        <div className="max-w-full h-full px-4 sm:px-6 lg:px-[60px]">
-          <div className="flex h-full items-center justify-between">
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-200 min-h-[64px] md:h-[80px] shadow-[0px_3px_15px_#084a857d]">
+        <div className="max-w-full h-full px-3 sm:px-6 lg:px-[60px]">
+          <div className="flex h-full items-center justify-between gap-2">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <a href=""><Image
+              <a href="/"><Image
                 src="/frontend/logo-future.png"
-                alt="Logo"
+                alt="FutureXP"
                 width={80}
                 height={50}
-                className="h-auto w-[80px] sm:w-[80px]"
+                className="h-auto w-[72px] sm:w-[80px]"
               /></a>
             </div>
 
@@ -70,17 +70,17 @@ export default function Header() {
               </Link> */}
             </nav>
 
-            <div className="flex items-center gap-[20px]">
+            <div className="flex items-center gap-2 sm:gap-3 md:gap-[20px] min-w-0">
               {user ? (
                 <div className="relative">
                   <button
                     type="button"
                     onClick={() => setIsUserMenuOpen((prev) => !prev)}
-                    className="bg-[#F2F2F2] hover:bg-[#E5E5E5] border border-[#D4D7E3] px-4 py-2.5 rounded-[10px] flex items-center gap-2 font-medium text-gray-700"
+                    className="bg-[#F2F2F2] hover:bg-[#E5E5E5] border border-[#D4D7E3] px-2 py-2 md:px-4 md:py-2.5 rounded-[8px] md:rounded-[10px] flex items-center gap-1.5 md:gap-2 font-medium text-gray-700 shrink-0"
                     aria-expanded={isUserMenuOpen}
                     aria-haspopup="true"
                   >
-                    <span className="w-8 h-8 rounded-full bg-[#084A85] flex items-center justify-center text-white text-sm font-semibold">
+                    <span className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[#084A85] flex items-center justify-center text-white text-xs md:text-sm font-semibold shrink-0">
                       {(user?.name || user?.email || "U").charAt(0).toUpperCase()}
                     </span>
                     <span className="hidden sm:inline max-w-[120px] truncate">
@@ -139,30 +139,30 @@ export default function Header() {
                   <button
                     type="button"
                     onClick={() => setIsLoginOpen(true)}
-                    className="bg-[#ffffff] border-[#7f7f7f] border-[1.5px] px-6 py-3 text-[#7f7f7f] font-medium rounded-[10px] flex items-center gap-[10px] cursor-pointer hover:bg-gray-50 transition-colors"
+                    className="bg-[#ffffff] border-[#7f7f7f] border-[1.5px] px-3 py-2 md:px-6 md:py-3 text-[#7f7f7f] font-medium rounded-[8px] md:rounded-[10px] flex items-center gap-1.5 md:gap-[10px] cursor-pointer hover:bg-gray-50 transition-colors text-sm md:text-base shrink-0"
                     aria-label="Open login"
                   >
                     <span>Login</span>
-                    <Image src="/frontend/log-ico.png" width={20} height={20} alt="" className="pointer-events-none" />
+                    <Image src="/frontend/log-ico.png" width={20} height={20} alt="" className="pointer-events-none w-4 h-4 md:w-5 md:h-5" />
                   </button>
-                  <a href="" className="bg-[#DC143C] px-6 py-3 text-[#ffffff] font-medium rounded-[10px] flex items-center gap-[10px]">Get Started <img src="/frontend/arrow.png" className="w-[20px]" alt="" /></a>
+                  <a href="#waitlist" className="bg-[#DC143C] px-3 py-2 md:px-6 md:py-3 text-[#ffffff] font-medium rounded-[8px] md:rounded-[10px] flex items-center gap-1.5 md:gap-[10px] text-sm md:text-base shrink-0 whitespace-nowrap">Get Started <img src="/frontend/arrow.png" className="w-4 h-4 md:w-5 md:h-5" alt="" /></a>
                 </>
               )}
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center">
+            {/* Mobile menu button */}
+            <div className="md:hidden flex items-center flex-shrink-0">
               <button
                 onClick={toggleMenu}
                 type="button"
-                className="text-gray-700 hover:text-gray-900 focus:outline-none"
+                className="text-gray-700 hover:text-gray-900 focus:outline-none p-1 -mr-1"
                 aria-label="Toggle menu"
               >
                 {isMenuOpen ? (
                   // Close Icon (X)
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8"
+                    className="h-7 w-7 sm:h-8 sm:w-8"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -173,7 +173,7 @@ export default function Header() {
                   // Hamburger Menu Icon
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8"
+                    className="h-7 w-7 sm:h-8 sm:w-8"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -262,13 +262,22 @@ export default function Header() {
               </button>
             </>
           ) : (
-            <button
-              type="button"
-              onClick={() => { setIsMenuOpen(false); setIsLoginOpen(true); }}
-              className="text-left text-white hover:text-gray-300 text-[16px] font-medium"
-            >
-              Login
-            </button>
+            <>
+              <button
+                type="button"
+                onClick={() => { setIsMenuOpen(false); setIsLoginOpen(true); }}
+                className="text-left text-white hover:text-gray-300 text-[16px] font-medium w-full py-3"
+              >
+                Login
+              </button>
+              <a
+                href="#waitlist"
+                onClick={() => setIsMenuOpen(false)}
+                className="bg-[#DC143C] px-6 py-3 text-[#ffffff] font-medium rounded-[10px] inline-flex items-center gap-2 mt-2"
+              >
+                Get Started <img src="/frontend/arrow.png" className="w-[20px]" alt="" />
+              </a>
+            </>
           )}
         </div>
       </div>
