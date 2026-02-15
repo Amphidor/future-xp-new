@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { API_BASE_URL } from "@/lib/api";
 
-export const dynamic = "force-dynamic";
+// Static export: return 401 so build succeeds; with output: "export" there is no server – call backend from client.
+export const dynamic = "force-static";
 
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get("authorization");

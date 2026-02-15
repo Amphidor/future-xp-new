@@ -74,7 +74,7 @@ export default function HowItWorks() {
               <Image src={feature.icon} alt={feature.title} width={60} height={60} />
             </div>
             <h3 className="text-[18px] font-semibold text-gray-900 mb-3">{feature.title}</h3>
-            <p className="text-[#424242] h-[16vh] text-[14px] leading-relaxed text-center">{feature.description}</p>
+            <p className="text-[#424242] min-h-0 md:h-[16vh] text-[14px] leading-relaxed text-center">{feature.description}</p>
           </div>
         ))}
       </div>

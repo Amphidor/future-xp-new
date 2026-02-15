@@ -62,7 +62,7 @@ export default function ChooseCareer() {
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:pt-20">
-      <h2 className="md:leading-[1.15] text-center text-[38px] lg:text-[38px] font-bold text-gray-700 font-semibold !leading-[1.6] mb-[60px]">
+      <h2 className="md:leading-[1.15] text-center text-2xl sm:text-3xl lg:text-[38px] font-bold text-gray-700 font-semibold !leading-[1.6] mb-8 md:mb-[60px]">
         Choosing a Career or Major Shouldn’t Be Confusing
       </h2>
 
@@ -73,12 +73,12 @@ export default function ChooseCareer() {
               <Image src={feature.icon} alt={feature.title} width={60} height={60} />
             </div>
             <h3 className="text-[18px] font-semibold text-gray-900 mb-3">{feature.title}</h3>
-            <p className="text-[#424242] h-[14vh] text-[14px] leading-relaxed text-left">{feature.description}</p>
+            <p className="text-[#424242] min-h-0 md:h-[14vh] text-[14px] leading-relaxed text-left">{feature.description}</p>
           </div>
         ))}
       </div>
 
-      <div className="text-center mt-[90px]">
+      <div className="text-center mt-10 md:mt-[90px]">
         <button className="bg-[#084A85] hover:bg-[#FFAE41] text-white px-8 py-3 rounded-[10px] font-medium transition flex items-center gap-[10px] justify-center m-auto text-[18px]"
           onClick={() => router.push('/#waitlist')}>
           Get Started <img src="/frontend/arrow.png" className="w-[20px]" />
