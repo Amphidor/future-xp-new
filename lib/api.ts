@@ -1,10 +1,12 @@
 import axios from "axios";
 
+/** External backend API base – used for login and register from the client (e.g. on Amplify). */
+export const EXTERNAL_API_URL = "https://console.future-xp.com/api";
+
 /**
- * Single source for backend API base URL (used in lib/api.ts).
+ * Single source for backend API base URL (server-side / Next.js API routes).
  * - npm run dev  → .env.development → http://localhost:3000/api
  * - npm run build / start / prod → .env.production → https://console.future-xp.com/api
- * Override via BACKEND_URL or NEXT_PUBLIC_API_URL in .env.local if needed.
  */
 const getApiBaseUrl = (): string => {
   const fromEnv =
@@ -12,27 +14,19 @@ const getApiBaseUrl = (): string => {
   if (fromEnv) return fromEnv.replace(/\/$/, ""); // trim trailing slash
   return process.env.NODE_ENV === "development"
     ? "http://localhost:3000/api"
-    : "https://console.future-xp.com/api";
+    : EXTERNAL_API_URL;
 };
 
 export const API_BASE_URL = getApiBaseUrl();
 
 /**
- * For client-side auth calls. In development we use same-origin /api (Next.js proxy).
- * In production we call the backend directly so auth works without API routes on Amplify.
- *
- * Many backends expose auth at the root (e.g. POST https://console.future-xp.com/auth/student-register).
- * Set NEXT_PUBLIC_AUTH_BASE_URL to the backend origin (no /api) if your auth routes are at root.
- * Set NEXT_PUBLIC_API_URL (with /api) if your auth routes are under /api.
+ * For client-side login and register. In development uses same-origin /api (Next.js proxy).
+ * In production uses EXTERNAL_API_URL so auth works without API routes on Amplify.
  */
 export function getClientAuthBaseUrl(): string {
   if (typeof window === "undefined") return ""; // SSR: use relative
   if (process.env.NODE_ENV === "development") return "";
-  const authBase =
-    process.env.NEXT_PUBLIC_AUTH_BASE_URL ??
-    process.env.NEXT_PUBLIC_API_URL ??
-    "https://console.future-xp.com";
-  return authBase.replace(/\/$/, "");
+  return EXTERNAL_API_URL;
 }
 
 export const api = axios.create({
