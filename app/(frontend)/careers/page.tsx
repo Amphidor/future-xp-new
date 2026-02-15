@@ -181,6 +181,8 @@ export default function CareersPage() {
         toast.error(data?.message ?? 'Swipe failed')
         return
       }
+      if (swipeAction === 'right') toast.success(`Liked ${card.title}!`)
+      else toast(`Disliked ${card.title}`)
       setCards((prev) => prev.filter((_, i) => i !== activeIndex))
 
       const sparkReset = data?.data?.spark_reset_counter
