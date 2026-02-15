@@ -19,13 +19,20 @@ export const API_BASE_URL = getApiBaseUrl();
 
 /**
  * For client-side auth calls. In development we use same-origin /api (Next.js proxy).
- * In production (e.g. Amplify static) we call the backend directly so auth works without API routes.
+ * In production we call the backend directly so auth works without API routes on Amplify.
+ *
+ * Many backends expose auth at the root (e.g. POST https://console.future-xp.com/auth/student-register).
+ * Set NEXT_PUBLIC_AUTH_BASE_URL to the backend origin (no /api) if your auth routes are at root.
+ * Set NEXT_PUBLIC_API_URL (with /api) if your auth routes are under /api.
  */
 export function getClientAuthBaseUrl(): string {
   if (typeof window === "undefined") return ""; // SSR: use relative
-  const url =
-    process.env.NEXT_PUBLIC_API_URL ?? "https://console.future-xp.com/api";
-  return process.env.NODE_ENV === "development" ? "" : url.replace(/\/$/, "");
+  if (process.env.NODE_ENV === "development") return "";
+  const authBase =
+    process.env.NEXT_PUBLIC_AUTH_BASE_URL ??
+    process.env.NEXT_PUBLIC_API_URL ??
+    "https://console.future-xp.com";
+  return authBase.replace(/\/$/, "");
 }
 
 export const api = axios.create({

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { API_BASE_URL } from "@/lib/api";
 import { cookies } from "next/headers";
+
+const EXTERNAL_API_URL = "https://console.future-xp.com/api";
 
 export async function GET(request: NextRequest) {
   try {
@@ -16,7 +17,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const res = await fetch(`${API_BASE_URL}/career_cards`, {
+    const res = await fetch(`${EXTERNAL_API_URL}/career_cards`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,

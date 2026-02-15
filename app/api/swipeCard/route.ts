@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { API_BASE_URL } from "@/lib/api";
 import { cookies } from "next/headers";
+
+const EXTERNAL_API_URL = "https://console.future-xp.com/api";
 
 export async function POST(request: NextRequest) {
   try {
@@ -27,7 +28,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const res = await fetch(`${API_BASE_URL}/swipeCard`, {
+    const res = await fetch(`${EXTERNAL_API_URL}/swipeCard`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
