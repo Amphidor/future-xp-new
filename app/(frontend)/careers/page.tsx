@@ -376,8 +376,10 @@ export default function CareersPage() {
                         </div>
                         <div className="back">
                           <div className="careers-card-back">
-                            <h2 className="careers-card-title">{card.title}</h2>
-                            <p className="careers-card-desc">{card.desc}</p>
+                            <div className="careers-card-back-header">
+                              <h2 className="careers-card-title">{card.title}</h2>
+                              <p className="careers-card-desc">{card.desc}</p>
+                            </div>
                             <ul className="careers-card-points">
                               {(card.points || []).map((point, i) => (
                                 <li key={i}>{point}</li>
