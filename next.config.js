@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable React strict mode
+  // Do not use output: "export" – app uses API routes (user/me, career_cards, swipeCard, etc.) which need a Node server.
+  // For Amplify: use SSR (Node) or attach a backend; for static hosting, proxy API calls to your backend from the client.
   reactStrictMode: true,
+  images: { unoptimized: true },
   // AWS Amplify runs Node on the server; ensure compatibility
   // Uncomment and adjust if you need image domains or rewrites:
   // images: {

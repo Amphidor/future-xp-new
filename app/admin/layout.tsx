@@ -35,6 +35,7 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { useSelector, useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 import { RootState } from "../../store";
 import { logout } from "../../store/slices/authSlice";
 
@@ -126,6 +127,7 @@ export default function AdminLayout({
   const [sidebarExpanded, setSidebarExpanded] = useState(true);
   const [sidebarMobileOpen, setSidebarMobileOpen] = useState(false);
   const [submenu, setSubmenu] = useState<number | null>(null);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const dispatch = useDispatch();
@@ -137,8 +139,10 @@ export default function AdminLayout({
   const equalPath = (a: string, b: string) => normalize(a) === normalize(b);
 
   const handleLogout = () => {
+    setIsLoggingOut(true);
     dispatch(logout());
-    router.push("/login");
+    toast.success("Logged out successfully");
+    router.push("/");
   };
 
   // Prefix match (used only for "is parent active?" logic)
@@ -478,9 +482,19 @@ export default function AdminLayout({
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={handleLogout}
-                    className="flex items-center gap-2 text-red-600 cursor-pointer"
+                    disabled={isLoggingOut}
+                    className="flex items-center gap-2 text-red-600 cursor-pointer disabled:opacity-70"
                   >
-                    <LogOut size={16} /> Logout
+                    {isLoggingOut ? (
+                      <>
+                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-red-600 border-t-transparent" />
+                        Logging out...
+                      </>
+                    ) : (
+                      <>
+                        <LogOut size={16} /> Logout
+                      </>
+                    )}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

@@ -3,12 +3,9 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import axios from "axios";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Cookies from "js-cookie";
-import { useDispatch } from "react-redux";
-import { logout } from "@/store/slices/authSlice";
 
 interface AuthCheckProps {
   children: React.ReactNode;
@@ -20,86 +17,22 @@ export default function AuthCheck({ children }: AuthCheckProps) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const router = useRouter();
   const pathname = usePathname();
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    let cancelled = false;
-
-    async function verify() {
-      if (PUBLIC_ROUTES.has(pathname)) {
-        if (!cancelled) setIsAuthenticated(true);
-        return;
-      }
-
-      let token = Cookies.get("token");
-      let refreshToken = Cookies.get("refreshToken");
-
-      if (!token) {
-        router.replace(`/login`);
-        return;
-      }
-
-      try {
-        await axios.get(`/api/user/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!cancelled) setIsAuthenticated(true);
-      } catch (err: any) {
-        const status = err?.response?.status;
-        const message = err?.response?.data?.message;
-
-        // -----------------------------------------
-        // 🔥 FIX: TRY REFRESH-TOKEN BEFORE LOGOUT
-        // -----------------------------------------
-        if ((status === 401 || message === "Invalid token.") && refreshToken) {
-          try {
-            const res = await axios.post(`/api/auth/refresh-token`, {
-              refreshToken,
-            });
-
-            // Save new tokens
-            Cookies.set("token", res.data.accessToken, { expires: 7 });
-            Cookies.set("refreshToken", res.data.refreshToken, { expires: 7 });
-
-            // Retry /me with new access token
-            await axios.get(`/api/user/me`, {
-              headers: {
-                Authorization: `Bearer ${res.data.accessToken}`,
-              },
-            });
-
-            if (!cancelled) setIsAuthenticated(true);
-            return;
-          } catch (refreshErr) {
-            // Refresh failed → proceed to logout
-          }
-        }
-
-        // -----------------------------------------
-        // ❌ OLD LOGOUT CODE (kept as-is)
-        // -----------------------------------------
-        try {
-          await axios.post(`/api/auth/logout`, {}, { withCredentials: true });
-        } catch (_) {}
-
-        Cookies.remove("token");
-        Cookies.remove("refreshToken");
-        dispatch(logout());
-        router.replace(`/login`);
-        return;
-      }
+    if (PUBLIC_ROUTES.has(pathname)) {
+      setIsAuthenticated(true);
+      return;
     }
 
-    setIsAuthenticated(null);
-    verify();
+    const token = Cookies.get("token");
+    if (!token) {
+      router.replace("/");
+      return;
+    }
 
-    return () => {
-      cancelled = true;
-    };
-  }, [pathname, router, dispatch]);
+    // Token present – allow access (no /me or /logout calls)
+    setIsAuthenticated(true);
+  }, [pathname, router]);
 
   if (isAuthenticated === null) {
     return (

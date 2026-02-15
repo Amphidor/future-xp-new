@@ -16,7 +16,7 @@ export default function Hero() {
       style={{ backgroundImage: "url(/frontend/hero-img.png)" }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-40"  />
+      <div className="absolute inset-0 bg-black bg-opacity-40" />
 
       {/* Content */}
       <div
@@ -28,7 +28,7 @@ export default function Hero() {
           text-center
         "
       >
-        <h1
+        {/* <h1
           className="
             text-[36px] md:text-[42px] lg:text-[72px] 
             font-regular text-white mt-3 sm:mt-4 md:mt-6 
@@ -36,7 +36,14 @@ export default function Hero() {
           "
         >
           Explore Your Future - Find careers and majors that fit your vibe
-        </h1>
+
+        </h1> */}
+
+        <div className="rotating-text-wrapper">
+          <h2>Helping Your Child Explore What’s Next - One Swipe at a Time</h2>
+          <h2>Feeling lost about your child’s future? We can help you.</h2>
+          <h2>Frustrated that your child doesn’t know what they want? We can help you.</h2>
+        </div>
 
         {/* <p
           className="

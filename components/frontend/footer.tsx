@@ -5,7 +5,7 @@ import { Facebook, Youtube, X, CircleUser } from 'lucide-react'
 
 export default function FooterLanding() {
   return (
-    <footer className="relative bg-white w-full px-4 sm:px-6 lg:px-[60px] border-primary-200 shadow-[0px_-3px_15px_#efbf0470]">
+    <footer className="relative bg-white w-full max-w-full overflow-x-hidden px-4 sm:px-6 lg:px-[60px] border-primary-200 shadow-[0px_-3px_15px_#efbf0470] box-border">
 
       <div className='grid md:grid-cols-2 gap-8'>
         <div>
@@ -13,7 +13,7 @@ export default function FooterLanding() {
             <Image src="/frontend/logo-future.png" alt="Logo" width={100} height={100} />
           </div>
 
-          <div className="text-left text-gray-400 max-w-2xl w-[550px] text-[15px] font-normal pl-2 mb-6">
+          <div className="text-left text-gray-400 w-full max-w-[550px] text-[15px] font-normal pl-2 mb-6">
             FutureXP introduces teens to real-world roles, essential skills, and growth opportunities. We turn real teen exploration data into meaningful insights, helping families make confident, data-informed decisions about college majors and future careers.
           </div>
 
@@ -34,20 +34,20 @@ export default function FooterLanding() {
 
         </div>
 
-        <div className='flex items-center gap-[200px]'>
-          <nav className="px-10 lg:px-0">
+        <div className="flex flex-col sm:flex-row sm:items-start gap-8 sm:gap-12 lg:gap-[200px]">
+          <nav className="px-0 sm:px-10 lg:px-0">
             <a href="#" className="text-black font-medium text-[17px] hover:text-[#084A85] transition block mb-6">Student</a>
             <a href="#" className="text-black font-medium text-[17px] hover:text-[#084A85] transition block mb-6">Parent</a>
             <a href="#" className="text-black font-medium text-[17px] hover:text-[#084A85] transition">School</a>
           </nav>
 
-          <nav className="px-10 lg:px-0">
+          <nav className="px-0 sm:px-10 lg:px-0">
             <a href="#" className="text-black font-medium text-[17px] hover:text-[#084A85] transition block mb-6">About</a>
             <a href="#" className="text-black font-medium text-[17px] hover:text-[#084A85] transition block mb-6">FAQ</a>
             <a href="#" className="text-black font-medium text-[17px] hover:text-[#084A85] transition">Help</a>
           </nav>
 
-          <nav className="px-10 lg:px-0">
+          <nav className="px-0 sm:px-10 lg:px-0">
             <a href="#" className="text-black font-medium text-[17px] hover:text-[#084A85] transition block mb-6">Data Sources</a>
             <a href="#" className="text-black font-medium text-[17px] hover:text-[#084A85] transition block mb-6">Terms</a>
             <a href="#" className="text-black font-medium text-[17px] hover:text-[#084A85] transition">Privacy Policy</a>

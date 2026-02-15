@@ -13,16 +13,28 @@ function loginApi(payload: { email: string; password: string }) {
   return axios.post("/api/auth/student-login", payload);
 }
 
-// Worker saga
+const COOKIE_OPTIONS = { expires: 7 }; // 7 days
+
+// Worker saga: save user + token from login response, then redirect is handled by LoginForm useEffect
 function* handleLogin(action: ReturnType<typeof loginRequest>): any {
   try {
     const response = yield call(loginApi, action.payload);
+    const data = response.data;
 
-    const { token, user } = response.data;
-    
-    // Save to cookies
-    Cookies.set("user", JSON.stringify(user));
-    Cookies.set("token", token);
+    const user = data.user ?? data;
+    const token = data.token ?? data.accessToken;
+
+    if (!user || !token) {
+      yield put(loginFailure("Invalid login response"));
+      return;
+    }
+
+    // Save to cookies so middleware and AuthCheck can use them
+    Cookies.set("user", JSON.stringify(user), COOKIE_OPTIONS);
+    Cookies.set("token", token, COOKIE_OPTIONS);
+    if (data.refreshToken) {
+      Cookies.set("refreshToken", data.refreshToken, COOKIE_OPTIONS);
+    }
 
     yield put(loginSuccess({ user, token }));
   } catch (error: any) {
@@ -36,6 +48,7 @@ function* handleLogin(action: ReturnType<typeof loginRequest>): any {
 function* handleLogout() {
   Cookies.remove("user");
   Cookies.remove("token");
+  Cookies.remove("refreshToken");
 }
 
 // Watcher saga

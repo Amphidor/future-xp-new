@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
 import { RootState } from "../../store";
 import { logout } from "../../store/slices/authSlice";
 import LoginForm from "../LoginForm";
@@ -12,15 +14,25 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const dispatch = useDispatch();
+  const router = useRouter();
   const user = useSelector((state: RootState) => state.auth.user);
+
+  // Close login modal when user is set (successful login)
+  useEffect(() => {
+    if (user) setIsLoginOpen(false);
+  }, [user]);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   const handleLogout = () => {
+    setIsLoggingOut(true);
     dispatch(logout());
     setIsUserMenuOpen(false);
     setIsMenuOpen(false);
+    toast.success("Logged out successfully");
+    router.push("/");
   };
 
   return (
@@ -30,13 +42,13 @@ export default function Header() {
           <div className="flex h-full items-center justify-between">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Image
+              <a href=""><Image
                 src="/frontend/logo-future.png"
                 alt="Logo"
                 width={80}
                 height={50}
                 className="h-auto w-[80px] sm:w-[80px]"
-              />
+              /></a>
             </div>
 
             {/* Desktop Navigation */}
@@ -88,7 +100,7 @@ export default function Header() {
                       />
                       <div className="absolute right-0 top-full mt-2 z-50 min-w-[200px] bg-white rounded-xl shadow-lg border border-gray-200 py-2 overflow-hidden">
                         <Link
-                          href="/dashboard"
+                          href="/user/dashboard"
                           onClick={() => setIsUserMenuOpen(false)}
                           className="flex items-center gap-2 px-4 py-3 text-gray-700 hover:bg-[#F2F2F2] text-[15px] font-medium"
                         >
@@ -101,12 +113,22 @@ export default function Header() {
                         <button
                           type="button"
                           onClick={handleLogout}
-                          className="w-full flex items-center gap-2 px-4 py-3 text-left text-[#DC143C] hover:bg-red-50 text-[15px] font-medium border-t border-gray-100"
+                          disabled={isLoggingOut}
+                          className="w-full flex items-center gap-2 px-4 py-3 text-left text-[#DC143C] hover:bg-red-50 text-[15px] font-medium border-t border-gray-100 disabled:opacity-70"
                         >
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                          </svg>
-                          Logout
+                          {isLoggingOut ? (
+                            <>
+                              <div className="animate-spin rounded-full h-5 w-5 border-2 border-[#DC143C] border-t-transparent" />
+                              Logging out...
+                            </>
+                          ) : (
+                            <>
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                              </svg>
+                              Logout
+                            </>
+                          )}
                         </button>
                       </div>
                     </>
@@ -117,9 +139,11 @@ export default function Header() {
                   <button
                     type="button"
                     onClick={() => setIsLoginOpen(true)}
-                    className="bg-[#ffffff] border-[#7f7f7f] border-[1.5px] px-6 py-3 text-[#7f7f7f] font-medium rounded-[10px] flex items-center gap-[10px]"
+                    className="bg-[#ffffff] border-[#7f7f7f] border-[1.5px] px-6 py-3 text-[#7f7f7f] font-medium rounded-[10px] flex items-center gap-[10px] cursor-pointer hover:bg-gray-50 transition-colors"
+                    aria-label="Open login"
                   >
-                    Login <img src="/frontend/log-ico.png" className="w-[20px]" alt="" />
+                    <span>Login</span>
+                    <Image src="/frontend/log-ico.png" width={20} height={20} alt="" className="pointer-events-none" />
                   </button>
                   <a href="" className="bg-[#DC143C] px-6 py-3 text-[#ffffff] font-medium rounded-[10px] flex items-center gap-[10px]">Get Started <img src="/frontend/arrow.png" className="w-[20px]" alt="" /></a>
                 </>
@@ -187,7 +211,7 @@ export default function Header() {
               </svg>
             </button>
             <div className="p-6 pt-12 overflow-y-auto flex-1 min-h-0">
-              <LoginForm inModal />
+              <LoginForm inModal onCloseModal={() => setIsLoginOpen(false)} />
             </div>
           </div>
         </div>
@@ -215,7 +239,7 @@ export default function Header() {
           {user ? (
             <>
               <Link
-                href="/dashboard"
+                href="/user/dashboard"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-white hover:text-gray-300 text-[16px] font-medium block"
               >
@@ -224,9 +248,17 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => { handleLogout(); setIsMenuOpen(false); }}
-                className="text-left text-[#ff6b6b] hover:text-red-300 text-[16px] font-medium"
+                disabled={isLoggingOut}
+                className="text-left text-[#ff6b6b] hover:text-red-300 text-[16px] font-medium disabled:opacity-70 flex items-center gap-2"
               >
-                Logout
+                {isLoggingOut ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-[#ff6b6b] border-t-transparent" />
+                    Logging out...
+                  </>
+                ) : (
+                  "Logout"
+                )}
               </button>
             </>
           ) : (

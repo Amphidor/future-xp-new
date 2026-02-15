@@ -2,6 +2,7 @@
 .next/
 out/
 build/
+amplify-deploy.zip
 
 # Dependencies
 node_modules/
@@ -21,6 +22,7 @@ amplify/
 .next/
 out/
 build/
+amplify-deploy.zip
  
 # Dependencies
 node_modules/
@@ -40,4 +42,4 @@ amplify/
 .env.development
 .env.development
 .env.development
-*.json
+

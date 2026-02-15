@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Eye, EyeOff } from "lucide-react";
+import DateOfBirthPicker from "./DateOfBirthPicker";
 import { loginRequest } from "../store/slices/authSlice";
 import Image from "next/image";
 import { RootState } from "../store";
@@ -12,9 +13,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 interface LoginFormProps {
   inModal?: boolean;
+  onCloseModal?: () => void;
 }
 
-export default function LoginForm({ inModal = false }: LoginFormProps) {
+export default function LoginForm({ inModal = false, onCloseModal }: LoginFormProps) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,9 +30,22 @@ export default function LoginForm({ inModal = false }: LoginFormProps) {
     firstName: "",
     lastName: "",
     email: "",
+    gender: "",
+    dob: "",
     password: "",
     confirmPassword: "",
   });
+
+  const GENDER_OPTIONS = [
+    { value: "MALE", label: "Male" },
+    { value: "FEMALE", label: "Female" },
+    { value: "NON_BINARY", label: "Non-binary" },
+    { value: "TRANSGENDER", label: "Transgender" },
+    { value: "INTERSEX", label: "Intersex" },
+    { value: "OTHER", label: "Other" },
+    { value: "PREFER_NOT_TO_SAY", label: "Prefer not to say" },
+    { value: "UNKNOWN", label: "Unknown" },
+  ] as const;
   const [showSignUpPassword, setShowSignUpPassword] = useState(false);
   const [signUpLoading, setSignUpLoading] = useState(false);
   const dispatch = useDispatch();
@@ -93,14 +108,18 @@ export default function LoginForm({ inModal = false }: LoginFormProps) {
     setSignUpLoading(true);
     try {
       const name = [signUpData.firstName, signUpData.lastName].filter(Boolean).join(" ").trim() || "User";
+      // Use Next.js API route (same origin) so backend on 3000 doesn't need CORS for 3001
       const res = await axios.post("/api/auth/student-register", {
         email: signUpData.email,
         password: signUpData.password,
         name,
+        ...(signUpData.gender && { gender: signUpData.gender }),
+        ...(signUpData.dob && { dob: signUpData.dob }),
       });
-      toast.success("Account created! You can sign in now.");
+      toast.success(res.data?.message ?? "Account created! You can sign in now.");
       setShowSignUp(false);
-      setSignUpData({ firstName: "", lastName: "", email: "", password: "", confirmPassword: "" });
+      setSignUpData({ firstName: "", lastName: "", email: "", gender: "", dob: "", password: "", confirmPassword: "" });
+      // Keep modal open and show login form so user can sign in right away (login is a popup, not a page)
     } catch (err: any) {
       const message = err.response?.data?.message || "Failed to create account. Please try again.";
       toast.error(message);
@@ -111,9 +130,14 @@ export default function LoginForm({ inModal = false }: LoginFormProps) {
 
   useEffect(() => {
     if (user) {
-      router.push("/dashboard"); // Redirect after login
+      toast.success("Signed in successfully");
+      router.push("/careers");
     }
   }, [user, router]);
+
+  useEffect(() => {
+    if (error) toast.error(error);
+  }, [error]);
 
   const formInner = (
     <div className={inModal ? "p-6 flex flex-col justify-center" : "p-8 flex flex-col justify-center"}>
@@ -211,6 +235,34 @@ export default function LoginForm({ inModal = false }: LoginFormProps) {
                       placeholder="Last Name"
                     />
                   </div>
+                </div>
+
+                <div>
+                  <label htmlFor="signup-gender" className="block text-sm font-medium text-gray-700">Gender</label>
+                  <select
+                    id="signup-gender"
+                    value={signUpData.gender}
+                    onChange={(e) => setSignUpData({ ...signUpData, gender: e.target.value })}
+                    className={`mt-1 block w-full px-4 border border-[#D4D7E3] rounded-lg shadow-sm bg-white focus:ring-primary-400 focus:border-primary-400 sm:text-sm ${inModal ? "py-2.5 mt-1" : "py-3 mt-2"}`}
+                  >
+                    <option value="">Select gender</option>
+                    {GENDER_OPTIONS.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label htmlFor="signup-dob" className="block text-sm font-medium text-gray-700">Date of Birth</label>
+                  <DateOfBirthPicker
+                    id="signup-dob"
+                    value={signUpData.dob}
+                    onChange={(dob) => setSignUpData({ ...signUpData, dob })}
+                    placeholder="DD/MM/YYYY"
+                    inModal={inModal}
+                  />
                 </div>
 
                 <div>

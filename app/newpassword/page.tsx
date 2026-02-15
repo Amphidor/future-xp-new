@@ -1,8 +1,5 @@
-import newpassword from '@/components/NewPassword';
+import NewPassword from '@/components/NewPassword';
 
-// Avoid static generation timeout: this page uses Redux/store and is auth-related
-export const dynamic = 'force-dynamic';
-
-export default function NewPassword() {
+export default function NewPasswordPage() {
   return <NewPassword />;
 }
