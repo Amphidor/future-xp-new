@@ -10,7 +10,10 @@ import Cookies from "js-cookie";
 
 // Use local API route (proxy) to avoid CORS - proxies to console.future-xp.com
 function loginApi(payload: { email: string; password: string }) {
-  return axios.post("/api/auth/student-login", payload);
+  return axios.post("/api/auth/student-login", payload, {
+    headers: { "Content-Type": "application/json" },
+    maxBodyLength: Infinity,
+  });
 }
 
 const COOKIE_OPTIONS = { expires: 7 }; // 7 days
@@ -21,11 +24,20 @@ function* handleLogin(action: ReturnType<typeof loginRequest>): any {
     const response = yield call(loginApi, action.payload);
     const data = response.data;
 
-    const user = data.user ?? data;
-    const token = data.token ?? data.accessToken;
+    const user = data?.user ?? data?.data?.user ?? data;
+    const token =
+      data?.token ??
+      data?.accessToken ??
+      data?.access_token ??
+      data?.data?.token ??
+      data?.data?.access_token;
 
     if (!user || !token) {
-      yield put(loginFailure("Invalid login response"));
+      yield put(
+        loginFailure(
+          data?.message ?? data?.error ?? "Invalid login response"
+        )
+      );
       return;
     }
 
@@ -38,9 +50,15 @@ function* handleLogin(action: ReturnType<typeof loginRequest>): any {
 
     yield put(loginSuccess({ user, token }));
   } catch (error: any) {
-    yield put(
-      loginFailure(error.response?.data?.message || "Login failed")
-    );
+    const status = error.response?.status;
+    const msg = error.response?.data?.message ?? error.response?.data?.error;
+    const fallback =
+      status === 401
+        ? "Invalid email or password"
+        : status === 400
+          ? msg || "Invalid request"
+          : "Login failed";
+    yield put(loginFailure(msg || fallback));
   }
 }
 

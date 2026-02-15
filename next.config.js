@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
   reactStrictMode: true,
   images: { unoptimized: true },
   // AWS Amplify runs Node on the server; ensure compatibility
