@@ -10,13 +10,18 @@ const publicRoutes = ['/login', '/signup', '/'];
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   console.log('pathname', pathname);
+  const token = req.cookies.get('token')?.value;
+
+  // If user is logged in and visits home, redirect to career page
+  if (pathname === '/' && token) {
+    return NextResponse.redirect(new URL('/careers', req.url));
+  }
+
   // Allow public routes without auth
   if (publicRoutes.some(route => pathname.startsWith(route))) {
     return NextResponse.next();
   }
 
-  // Check for auth token cookie - example: "token"
-  const token = req.cookies.get('token')?.value;
   // If accessing protected route and no token, redirect to login
   if (protectedRoutes.some(route => pathname.startsWith(route))) {
     if (!token) {
