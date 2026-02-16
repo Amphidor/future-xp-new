@@ -31,13 +31,18 @@ function isProtected(pathname: string): boolean {
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+  const token = req.cookies.get("token")?.value;
+
+  // If user is logged in and visits home, redirect to career page
+  if (pathname === "/" && token) {
+    return NextResponse.redirect(new URL("/careers", req.url));
+  }
 
   if (isPublic(pathname)) {
     return NextResponse.next();
   }
 
   if (isProtected(pathname)) {
-    const token = req.cookies.get("token")?.value;
     if (!token) {
       // Redirect to home so user can open login popup
       return NextResponse.redirect(new URL("/", req.url));

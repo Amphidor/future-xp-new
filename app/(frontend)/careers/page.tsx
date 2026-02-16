@@ -73,8 +73,8 @@ function mapApiToCard(item: any, index: number): CardItem {
 
 export default function CareersPage() {
   const token = useSelector((state: RootState) => state.auth.token)
-  const verticalSwiperRef = useRef<SwiperType>()
-  const fadeSwiperRef = useRef<SwiperType>()
+  const verticalSwiperRef = useRef<SwiperType | null>(null)
+  const fadeSwiperRef = useRef<SwiperType | null>(null)
   const touchStartX = useRef<number>(0)
   const touchStartY = useRef<number>(0)
   const verticalWrapperRef = useRef<HTMLDivElement>(null)
