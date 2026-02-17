@@ -18,10 +18,13 @@ const getApiBaseUrl = (): string => {
 export const API_BASE_URL = getApiBaseUrl();
 
 /**
- * For client-side login and register. Uses production URL so local and prod both hit console.future-xp.com.
+ * For client-side login and register.
+ * In development we use same-origin /api (Next.js proxy) to avoid CORS.
+ * In production we call EXTERNAL_API_URL directly.
  */
 export function getClientAuthBaseUrl(): string {
   if (typeof window === "undefined") return "";
+  if (process.env.NODE_ENV === "development") return "";
   return EXTERNAL_API_URL;
 }
 

@@ -3,8 +3,8 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 // Define protected routes and public routes as needed
-const protectedRoutes = ['/dashboard', '/admin','/user/dashboard','/user/profile','/careers'];
-const publicRoutes = ['/login', '/signup', '/'];
+const protectedRoutes = ['/dashboard', '/admin','/user/dashboard','/user/profile'];
+const publicRoutes = ['/login', '/signup', '/careers'];
 
 // Middleware runs on every request matching config.matcher below
 export function middleware(req: NextRequest) {
